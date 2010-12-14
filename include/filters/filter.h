@@ -30,6 +30,7 @@ GNU General Public License for more details.
 #include <string>
 #include <sstream>
 #include <ctype.h>
+#include <stdlib.h>
 #include <string>
 
 #include <fingerprint.h>

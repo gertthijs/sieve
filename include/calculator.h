@@ -23,10 +23,14 @@ GNU General Public License for more details.
 
 
 
+#include "stripSalts.h"
+
+
 // Library includes
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include <stdlib.h>
 
 // Open Babel includes
 #include <openbabel/mol.h>

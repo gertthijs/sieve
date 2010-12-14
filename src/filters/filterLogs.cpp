@@ -160,7 +160,7 @@ FilterLogs::Calculate(OpenBabel::OBMol* mol)
    
    // Fragments
    std::vector< std::vector< int > > matches;
-   for (unsigned int i = 0; i < _p.size(); ++i)
+   for (unsigned int i(0); i < _p.size(); ++i)
    {
       _p[i]->Match(*mol, false);
       matches = _p[i]->GetUMapList();

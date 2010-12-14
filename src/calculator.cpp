@@ -543,7 +543,8 @@ Calculator::Calculate(Options* o)
       mol.FindRingAtomsAndBonds();
          
       // Strip salts
-      if (!o->Salts()) (void) mol.StripSalts();
+//      if (!o->Salts()) (void) mol.StripSalts();  // Use again this function as of OB 2.3.1
+      if (!o->Salts()) StripSalts(&mol);
          
       // Molecule name
       if (o->Rename())

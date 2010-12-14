@@ -25,6 +25,7 @@ GNU General Public License for more details.
 
 #include <getopt.h>
 #include <options.h>
+#include <stdlib.h>
 
 #include <openbabel/obconversion.h>
 

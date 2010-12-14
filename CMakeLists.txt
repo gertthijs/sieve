@@ -9,7 +9,7 @@ find_package(OpenBabel2 REQUIRED)
 # Version
 set (${PROJECT_NAME}_VERSION_MAJOR 3)
 set (${PROJECT_NAME}_VERSION_MINOR 0)
-set (${PROJECT_NAME}_VERSION_PATCH 2)
+set (${PROJECT_NAME}_VERSION_PATCH 4)
 configure_file ("${PROJECT_SOURCE_DIR}/sieveConfig.h.in" "${PROJECT_SOURCE_DIR}/include/sieveConfig.h")
 
 # Release type
@@ -92,6 +92,7 @@ set (sources     ${SieveDir}/main.cpp
                  ${SieveDir}/filters/filterTitle.cpp
                  ${SieveDir}/filters/filterTotalFormalCharge.cpp
                  ${SieveDir}/filters/filterTpsa.cpp
+				 ${SieveDir}/stripSalts.cpp				# Should be removed in OB 2.3.x
 )
 
 # Include files from sieve project
