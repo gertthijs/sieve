@@ -9,7 +9,7 @@ find_package(OpenBabel2 REQUIRED)
 # Version
 set (${PROJECT_NAME}_VERSION_MAJOR 3)
 set (${PROJECT_NAME}_VERSION_MINOR 0)
-set (${PROJECT_NAME}_VERSION_PATCH 1)
+set (${PROJECT_NAME}_VERSION_PATCH 2)
 configure_file ("${PROJECT_SOURCE_DIR}/sieveConfig.h.in" "${PROJECT_SOURCE_DIR}/include/sieveConfig.h")
 
 # Release type
@@ -103,3 +103,27 @@ include_directories(${OPENBABEL2_INCLUDE_DIR})
 add_executable(${PROJECT_NAME} ${sources})
 target_link_libraries(${PROJECT_NAME} ${OPENBABEL2_LIBRARIES})
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
+
+
+
+#-----------------------------------------
+# packaging source tar.gz
+#
+set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Sieve: filtering of molecules.")
+set(CPACK_PACKAGE_VENDOR "Silicos NV")
+set(CPACK_PACKAGE_VERSION_MAJOR @sieve_VERSION_MAJOR@)
+set(CPACK_PACKAGE_VERSION_MINOR @sieve_VERSION_MINOR@)
+set(CPACK_PACKAGE_VERSION_PATCH @sieve_VERSION_PATCH@)
+
+set(CPACK_RESOURCE_FILE_LICENSE "COPYING")
+set(CPACK_RESOURCE_FILE_README "README.TXT")
+
+set(CPACK_SOURCE_GENERATOR "TGZ")
+set(CPACK_SOURCE_IGNORE_FILES 
+	".svn;/CMakeFiles/;.DS_Store;/_CPack_Packages/;CMakeCache.txt;sieve.tmproj;Makefile"
+)
+set(CPACK_SOURCE_PACKAGE_FILE_NAME "${PROJECT_NAME}-${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH}")
+
+include(CPack)
+
