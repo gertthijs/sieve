@@ -111,7 +111,7 @@ FilterDistance::FailMessage(const OpenBabel::OBMol* mol) const
    os << title;
    os << " >> failed ";
    os << _keyword;
-   os << " filter criterium";
+   os << " filter criterion";
    if (_msg != "")
    {
       os << _msg;

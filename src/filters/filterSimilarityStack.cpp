@@ -255,7 +255,7 @@ void
 FilterSimilarityStack::Calculate(OpenBabel::OBMol* mol)
 {
    _fingerprinter.CalculateFP(mol, _molfp);
-   _result = Tanimoto(_molfp, _reffp);
+   _result = _fingerprinter.Tanimoto(_molfp, _reffp);
 
    if ((_minLimit && (_result < _min)) || (_maxLimit && (_result > _max)))
    {

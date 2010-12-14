@@ -104,7 +104,7 @@ FilterSimilarity::FailMessage(const OpenBabel::OBMol* mol) const
    os << _keyword;
    os << " \"";
    os << _name;
-   os << "\" filter criterium (";
+   os << "\" filter criterion (";
    os << _result;
    os << ")";
    title = os.str();
@@ -258,7 +258,7 @@ void
 FilterSimilarity::Calculate(OpenBabel::OBMol* mol)
 {
    _fingerprinter.CalculateFP(mol, _molfp);
-   _result = Tanimoto(_molfp, _reffp);
+   _result = _fingerprinter.Tanimoto(_molfp, _reffp);
 
    if ((_minLimit && (_result < _min)) || (_maxLimit && (_result > _max)))
    {

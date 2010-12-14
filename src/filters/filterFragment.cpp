@@ -98,7 +98,7 @@ FilterFragment::FailMessage(const OpenBabel::OBMol* mol) const
    os << _keyword;
    os << " \"";
    os << _name;
-   os << "\" filter criterium (";
+   os << "\" filter criterion (";
    os << _result;
    os << ")";
    title = os.str();

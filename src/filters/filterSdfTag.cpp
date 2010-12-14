@@ -93,7 +93,7 @@ FilterSdfTag::FailMessage(const OpenBabel::OBMol* mol) const
    os << " >> failed ";
    os << _keyword;
    os << " " << _tagName;
-   os << " filter criterium (";
+   os << " filter criterion (";
    os << _result;
    os << ")";
    return os.str();

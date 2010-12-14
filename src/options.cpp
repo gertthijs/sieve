@@ -55,7 +55,7 @@ Options::Options(const Options& f)
    _tabulate = f._tabulate;
    _salts = f._salts;
    _noLog = f._noLog;
-   _rename - f._rename;
+   _rename = f._rename;
 }
 
 
@@ -74,7 +74,7 @@ Options::operator=(const Options& f)
    _tabulate = f._tabulate;
    _salts = f._salts;
    _noLog = f._noLog;
-   _rename - f._rename;
+   _rename = f._rename;
 
    return *this;
 }

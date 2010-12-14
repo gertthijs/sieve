@@ -83,7 +83,7 @@ FilterTitle::FailMessage(const OpenBabel::OBMol* mol) const
    os << title;
    os << " >> failed ";
    os << _keyword;
-   os << " filter criterium (";
+   os << " filter criterion (";
    os << _result;
    os << ")";
    return os.str();

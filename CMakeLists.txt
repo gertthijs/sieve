@@ -9,7 +9,7 @@ find_package(OpenBabel2 REQUIRED)
 # Version
 set (${PROJECT_NAME}_VERSION_MAJOR 3)
 set (${PROJECT_NAME}_VERSION_MINOR 0)
-set (${PROJECT_NAME}_VERSION_PATCH 0)
+set (${PROJECT_NAME}_VERSION_PATCH 1)
 configure_file ("${PROJECT_SOURCE_DIR}/sieveConfig.h.in" "${PROJECT_SOURCE_DIR}/include/sieveConfig.h")
 
 # Release type
@@ -20,7 +20,6 @@ set (SieveDir ${PROJECT_SOURCE_DIR}/src)
 set (sources     ${SieveDir}/main.cpp
                  ${SieveDir}/calculator.cpp
                  ${SieveDir}/counter.cpp
-                 ${SieveDir}/fingerprint.cpp
                  ${SieveDir}/options.cpp
                  ${SieveDir}/parseCommandLine.cpp
                  ${SieveDir}/filters/filter.cpp
