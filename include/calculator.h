@@ -23,9 +23,6 @@ GNU General Public License for more details.
 
 
 
-#include "stripSalts.h"
-
-
 // Library includes
 #include <fstream>
 #include <vector>
@@ -38,6 +35,7 @@ GNU General Public License for more details.
 // Sieve includes
 #include <options.h>
 #include <counter.h>
+#include <parseCommandLine.h>
 
 // Sdf-tag filters
 #include <filters/filterSdfTag.h>

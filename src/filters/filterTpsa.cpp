@@ -24,7 +24,7 @@ GNU General Public License for more details.
 
 FilterTpsa::FilterTpsa(void)
 {
-   _keyword = "TPSA";
+   _keyword = "TPSA";    
 
    _s.push_back("[$([NH0;X3;!-;!+]([!#1])([!#1])[!#1]);!$([NH0;X3;!-;!+]1([!#1])[!#1][!#1]1)]");
    _v.push_back(3.24);
@@ -157,9 +157,9 @@ FilterTpsa::FilterTpsa(void)
    
    for (unsigned int i = 0; i < _s.size(); ++i)
    {
-      _p.push_back(new OpenBabel::OBSmartsPattern());
-      _p[i]->Init(_s[i]);
-   }
+	  _p.push_back(new OpenBabel::OBSmartsPattern());
+	  _p[i]->Init(_s[i]);
+   }  
 }
 
 

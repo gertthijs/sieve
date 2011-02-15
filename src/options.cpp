@@ -46,11 +46,8 @@ Options::Options(const Options& f)
 {
    // Class members
    _ifile = f._ifile;
-   _iconv = f._iconv;
    _pfile = f._pfile;
-   _pconv = f._pconv;
    _ffile = f._ffile;
-   _fconv = f._fconv;
    _filterFileName = f._filterFileName;
    _tabulate = f._tabulate;
    _salts = f._salts;
@@ -65,11 +62,8 @@ Options::operator=(const Options& f)
 {
    // Class members
    _ifile = f._ifile;
-   _iconv = f._iconv;
    _pfile = f._pfile;
-   _pconv = f._pconv;
    _ffile = f._ffile;
-   _fconv = f._fconv;
    _filterFileName = f._filterFileName;
    _tabulate = f._tabulate;
    _salts = f._salts;
@@ -82,7 +76,7 @@ Options::operator=(const Options& f)
 
 
 bool
-Options::InputFilename(std::string f)
+Options::SetInputFilename(const std::string& f)
 {
    _ifile = f;
    if (_ifile.empty()) return false;
@@ -92,37 +86,15 @@ Options::InputFilename(std::string f)
 
 
 std::string
-Options::InputFilename(void) const
+Options::GetInputFilename(void)
 {
    return _ifile;
 }
 
 
-std::string
-Options::InputFormat(void) const
-{
-   return std::string(_iconv.GetInFormat()->GetID());
-}
-
-
-std::ifstream*
-Options::InputStream(void)
-{
-   return &_ifs;
-}
-
-
-
-OpenBabel::OBConversion*
-Options::InputConverter(void)
-{
-   return &_iconv;
-}
-
-
 
 bool
-Options::FailFilename(const std::string& f)
+Options::SetFailFilename(const std::string& f)
 {
    _ffile = f;
    if (_ffile.empty()) return false;
@@ -132,37 +104,15 @@ Options::FailFilename(const std::string& f)
 
 
 std::string
-Options::FailFilename(void) const
+Options::GetFailFilename(void)
 {
    return _ffile;
 }
 
 
-std::string
-Options::FailFormat(void) const
-{
-   return std::string(_fconv.GetOutFormat()->GetID());
-}
-
-
-std::ofstream*
-Options::FailStream(void)
-{
-   return &_ffs;
-}
-
-
-
-OpenBabel::OBConversion*
-Options::FailConverter(void)
-{
-   return &_fconv;
-}
-
-
 
 bool
-Options::PassFilename(const std::string& f)
+Options::SetPassFilename(const std::string& f)
 {
    _pfile = f;
    if (_pfile.empty()) return false;
@@ -172,38 +122,15 @@ Options::PassFilename(const std::string& f)
 
 
 std::string
-Options::PassFilename(void) const
+Options::GetPassFilename(void)
 {
    return _pfile;
 }
 
 
-std::string
-Options::PassFormat(void) const
-{
-   return std::string(_pconv.GetOutFormat()->GetID());
-}
-
-
-
-std::ofstream*
-Options::PassStream(void)
-{
-   return &_pfs;
-}
-
-
-
-OpenBabel::OBConversion*
-Options::PassConverter(void)
-{
-   return &_pconv;
-}
-
-
 
 bool
-Options::FilterFilename(const std::string& f)
+Options::SetFilterFilename(const std::string& f)
 {
    _filterFileName = f;
    if (_filterFileName.empty()) return false;
@@ -213,7 +140,7 @@ Options::FilterFilename(const std::string& f)
 
 
 std::string
-Options::FilterFilename(void) const
+Options::GetFilterFilename(void)
 {
    return _filterFileName;
 }
@@ -312,44 +239,14 @@ Options::Print(void) const
    os << "  -> Tabulate mode:     " << (_tabulate ? "yes" : "no") << std::endl;
    os << "  -> Write log file:    " << (_noLog ? "no" : "yes") << std::endl;
    os << "  -> Filter file:       " << _filterFileName << std::endl;
-   os << "  -> Input file:        " << _ifile << " (";
-   os << Options::InputFormat() << ") -> ";
-   if (_ifs.good())
-   {
-      os << "ok";
-   }
-   else
-   {
-      os << "error";
-   }
-   os << std::endl;
+   os << "  -> Input file:        " << _ifile << std::endl;
    if (!_tabulate)
    {
-      os << "  -> Pass file:         " << _pfile << " (";
-      os << Options::PassFormat() << ") -> ";
-      if (_pfs.good())
-      {
-         os << "ok";
-      }
-      else
-      {
-         os << "error";
-      }
-      os << std::endl;
+      os << "  -> Pass file:         " << _pfile << std::endl;
    }
    if (!_tabulate && !_ffile.empty())
    {
-      os << "  -> Fail file:         " << _ffile << " (";
-      os << Options::FailFormat() << ") -> ";
-      if (_ffs.good())
-      {
-         os << "ok";
-      }
-      else
-      {
-         os << "error";
-      }
-      os << std::endl;
+      os << "  -> Fail file:         " << _ffile << std::endl;
    }
    os << std::endl;
    

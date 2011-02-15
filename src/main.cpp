@@ -27,26 +27,24 @@ GNU General Public License for more details.
 
 int main (int argc, char* argv[])
 {
-   // Parse command line
-   Options* uo = new Options();
-   parseCommandLine(argc, argv, uo);
-   version();
-   std::cerr << uo->Print();
-   
-   // Initiate the filter cards
-   Calculator filter;
-   std::cerr << "## INITIATING FILTER PARAMETERS ##" << std::endl << std::endl;
-   filter.ParseFilterFile(uo->FilterFilename(), uo);
+   	// Parse command line
+   	Options* uo = new Options();
+  	parseCommandLine(argc, argv, uo);
+   	version();
+  
+   	// Initiate the filter cards
+   	Calculator filter;
+   	std::cerr << "## INITIATING FILTER PARAMETERS ##" << std::endl << std::endl;
+  	filter.ParseFilterFile(uo->GetFilterFilename(), uo);
 
-   // Filter
-   std::cerr << std::endl;
-   std::cerr << "## STARTING CALCULATIONS ##" << std::endl << std::endl;
-   Counter counts = filter.Calculate(uo);
-   std::cerr << std::endl << counts.Results();
-   std::cerr << "## FINISHED CALCULATIONS ##" << std::endl << std::endl;
+   	// Filter
+   	Counter counts = filter.Calculate(uo);
+	std::cerr << "CALCULATED" << std::endl; 
+   	std::cerr << std::endl << counts.Results();
+   	std::cerr << "## FINISHED CALCULATIONS ##" << std::endl << std::endl;
 
-   // Return
-   delete uo;
-   uo = NULL;
-   return 0;
+   	// Return
+   	delete uo;
+   	uo = NULL;
+   	return 0;
 }

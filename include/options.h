@@ -33,16 +33,8 @@ class Options
 {
    protected:
 
-      OpenBabel::OBConversion _iconv;
-      std::ifstream           _ifs;
       std::string             _ifile;           // --in
-
-      OpenBabel::OBConversion _pconv;
-      std::ofstream           _pfs;
       std::string             _pfile;           // --pass
-
-      OpenBabel::OBConversion _fconv;
-      std::ofstream           _ffs;
       std::string             _ffile;           // --fail
 
       std::string             _filterFileName;  // --filter
@@ -59,26 +51,17 @@ class Options
       Options(const Options&);
       Options& operator=(const Options&);
 
-      virtual bool                  InputFilename(std::string);
-      virtual std::string           InputFilename(void) const;
-      virtual std::string           InputFormat(void) const;
-      virtual OpenBabel::OBConversion* InputConverter(void);
-      virtual std::ifstream*        InputStream(void);
+      virtual bool                  SetInputFilename(const std::string&);
+      virtual std::string           GetInputFilename(void);
 
-      virtual bool                  FailFilename(const std::string&);
-      virtual std::string           FailFilename(void) const;
-      virtual std::string           FailFormat(void) const;
-      virtual OpenBabel::OBConversion* FailConverter(void);
-      virtual std::ofstream*        FailStream(void);
+      virtual bool                  SetFailFilename(const std::string&);
+      virtual std::string           GetFailFilename(void);
 
-      virtual bool                  PassFilename(const std::string&);
-      virtual std::string           PassFilename(void) const;
-      virtual std::string           PassFormat(void) const;
-      virtual OpenBabel::OBConversion* PassConverter(void);
-      virtual std::ofstream*        PassStream(void);
+      virtual bool                  SetPassFilename(const std::string&);
+      virtual std::string           GetPassFilename(void);
 
-      virtual bool                  FilterFilename(const std::string&);
-      virtual std::string           FilterFilename(void) const;
+      virtual bool                  SetFilterFilename(const std::string&);
+      virtual std::string           GetFilterFilename(void);
 
       virtual void                  Tabulate(const bool&);
       virtual bool                  Tabulate(void) const;

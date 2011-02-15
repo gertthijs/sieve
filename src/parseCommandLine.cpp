@@ -26,7 +26,7 @@ GNU General Public License for more details.
 void
 parseCommandLine(int argc, char* argv[], Options* o)
 {
-   static struct option Arguments[] =
+	static struct option Arguments[] =
 	{
         { "in",              required_argument,   NULL, '1' },
 		{ "pass",            required_argument,   NULL, '2' },
@@ -41,12 +41,11 @@ parseCommandLine(int argc, char* argv[], Options* o)
       { NULL,              0,                   NULL,  0  }
 	};
 
-   // Process commandline
+   	// Process commandline
 	int choice;
     std::string ff;
 	opterr = 0;
 	int optionIndex = 0;
-    OpenBabel::OBFormat* format;
 	while ((choice = getopt_long(argc, argv, "vh", Arguments, &optionIndex )) != -1)
 	{
       switch(choice)
@@ -63,77 +62,19 @@ parseCommandLine(int argc, char* argv[], Options* o)
             break;
 
          case '1':
-            (void) o->InputFilename(optarg);
-            format = o->InputConverter()->FormatFromExt(optarg);
-            if (!format)
-            {
-               version();
-               usage();
-               std::cerr << "ERROR:" << std::endl << std::endl;
-               std::cerr << "  Could not detect format from the '--in' option.\n" << std::endl;
-               exit(1);
-            }
-            o->InputConverter()->SetInFormat(format);
-            o->InputStream()->open(optarg);
-            if (!o->InputStream()->good())
-            {
-               version();
-               usage();
-               std::cerr << "ERROR:" << std::endl << std::endl;
-               std::cerr << "  Cannot open the file as specified by the '--in' option.\n" << std::endl;
-               exit(1);
-            }
-            o->InputConverter()->AddOption("d", OpenBabel::OBConversion::GENOPTIONS);
+            (void) o->SetInputFilename(optarg);
             break;
             
          case '2':
-            (void) o->PassFilename(optarg);
-            format = o->PassConverter()->FormatFromExt(optarg);
-            if (!format)
-            {
-               version();
-               usage();
-               std::cerr << "ERROR:" << std::endl << std::endl;
-               std::cerr << "  Could not detect format from the '--pass' option.\n" << std::endl;
-               exit(1);
-            }
-            o->PassConverter()->SetOutFormat(format);
-            o->PassStream()->open(optarg);
-            if (!o->PassStream()->good())
-            {
-               version();
-               usage();
-               std::cerr << "ERROR:" << std::endl << std::endl;
-               std::cerr << "  Cannot open the file as specified by the '--pass' option.\n" << std::endl;
-               exit(1);
-            }
+            (void) o->SetPassFilename(optarg);
             break;
 
          case '3':
-            (void) o->FailFilename(optarg);
-            format = o->FailConverter()->FormatFromExt(optarg);
-            if (!format)
-            {
-               version();
-               usage();
-               std::cerr << "ERROR:" << std::endl << std::endl;
-               std::cerr << "  Could not detect format from the '--fail' option.\n" << std::endl;
-               exit(1);
-            }
-            o->FailConverter()->SetOutFormat(format);
-            o->FailStream()->open(optarg);
-            if (!o->FailStream()->good())
-            {
-               version();
-               usage();
-               std::cerr << "ERROR:" << std::endl << std::endl;
-               std::cerr << "  Cannot open the file as specified by the '--fail' option.\n" << std::endl;
-               exit(1);
-            }
+			(void) o->SetFailFilename(optarg);
             break;
             
          case '4':
-            if (!o->FilterFilename(optarg))
+            if (!o->SetFilterFilename(optarg))
             {
                version();
                usage();
@@ -172,7 +113,7 @@ parseCommandLine(int argc, char* argv[], Options* o)
 	argv += optind;
 
    // Input file processing
-   if (o->InputFilename().empty())
+   if (o->GetInputFilename().empty())
    {
       version();
       usage();
@@ -184,7 +125,7 @@ parseCommandLine(int argc, char* argv[], Options* o)
    if (!o->Tabulate())
    {
       // Pass file processing
-      if (o->PassFilename().empty())
+      if (o->GetPassFilename().empty())
       {
          version();
          usage();
@@ -195,7 +136,7 @@ parseCommandLine(int argc, char* argv[], Options* o)
    }
    
    // Filter file processing
-   if (o->FilterFilename().empty())
+   if (o->GetFilterFilename().empty())
    {
       version();
       usage();
