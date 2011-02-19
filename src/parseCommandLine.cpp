@@ -40,7 +40,13 @@ parseCommandLine(int argc, char* argv[], Options* o)
 		{ "version",         no_argument,         NULL, 'v' },
       { NULL,              0,                   NULL,  0  }
 	};
-
+          
+	// Set default values
+   o->Tabulate(false);
+   o->Salts(false);
+   o->NoLog(false);
+   o->Rename(false);
+	
    	// Process commandline
 	int choice;
     std::string ff;

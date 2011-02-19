@@ -632,6 +632,7 @@ Calculator::Calculate(Options* o)
       	// Strip salts
 		if (!o->Salts())
 		{
+			std::string oldTitle(mol->GetTitle());
 			std::vector<OpenBabel::OBMol> mols = mol->Separate();
 			if (mols.size() > 1)
 			{
@@ -646,10 +647,12 @@ Calculator::Calculate(Options* o)
 					}
 				}
 				*mol = mols[maxindex];
+				mol->SetTitle(oldTitle);
  			}
    		}
-         
+
       	// Molecule name
+		std::cerr << "RENAME: " << o->Rename() << std::endl;
       	if (o->Rename())
       	{
          	os.str("");

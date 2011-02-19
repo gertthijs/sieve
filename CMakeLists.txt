@@ -9,7 +9,7 @@ find_package(OpenBabel2 REQUIRED)
 # Version
 set (${PROJECT_NAME}_VERSION_MAJOR 3)
 set (${PROJECT_NAME}_VERSION_MINOR 0)
-set (${PROJECT_NAME}_VERSION_PATCH 5)
+set (${PROJECT_NAME}_VERSION_PATCH 6)
 configure_file ("${PROJECT_SOURCE_DIR}/sieveConfig.h.in" "${PROJECT_SOURCE_DIR}/include/sieveConfig.h")
 
 # Release type
