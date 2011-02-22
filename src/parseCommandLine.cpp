@@ -127,7 +127,7 @@ parseCommandLine(int argc, char* argv[], Options* o)
       std::cerr << "  Command line option '--in' is missing.\n" << std::endl;
       exit(1);
    }
-   
+
    if (!o->Tabulate())
    {
       // Pass file processing

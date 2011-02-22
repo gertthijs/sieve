@@ -481,27 +481,30 @@ Calculator::Calculate(Options* o)
 
    	// Process passfile as specified on commandline
 	std::ofstream* pfs = new std::ofstream();
-	pfs->open(o->GetPassFilename().c_str());
 	OpenBabel::OBConversion* pconv = new OpenBabel::OBConversion();
-	pconv->SetOutStream(pfs);
-	format = pconv->FormatFromExt(o->GetPassFilename().c_str());
-    pconv->SetOutFormat(format);
-    if (!format)
-    {
-       version();
-       usage();
-       std::cerr << "ERROR:" << std::endl << std::endl;
-       std::cerr << "  Could not detect format from the '--pass' option.\n" << std::endl;
-       exit(1);
-    }
-    if (!pconv->GetOutStream()->good())
-    {
-       version();
-       usage();
-       std::cerr << "ERROR:" << std::endl << std::endl;
-       std::cerr << "  Cannot open the file as specified by the '--pass' option.\n" << std::endl;
-       exit(1);
-    }
+	if (!o->GetPassFilename().empty())
+	{
+		pfs->open(o->GetPassFilename().c_str());
+		pconv->SetOutStream(pfs);
+		format = pconv->FormatFromExt(o->GetPassFilename().c_str());
+    	pconv->SetOutFormat(format);
+    	if (!format)
+    	{
+       		version();
+       		usage();
+       		std::cerr << "ERROR:" << std::endl << std::endl;
+       		std::cerr << "  Could not detect format from the '--pass' option.\n" << std::endl;
+       		exit(1);
+    	}
+    	if (!pconv->GetOutStream()->good())
+    	{
+       		version();
+       		usage();
+       		std::cerr << "ERROR:" << std::endl << std::endl;
+       		std::cerr << "  Cannot open the file as specified by the '--pass' option.\n" << std::endl;
+       		exit(1);
+    	}
+	}
 
    	// Process failfile as specified on commandline
 	std::ofstream* ffs = new std::ofstream();
