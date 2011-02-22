@@ -110,20 +110,45 @@ install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 # packaging source tar.gz
 #
 set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Sieve: filtering of molecules.")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Sieve: filtering of molecules")
 set(CPACK_PACKAGE_VENDOR "Silicos NV")
 set(CPACK_PACKAGE_VERSION_MAJOR @sieve_VERSION_MAJOR@)
 set(CPACK_PACKAGE_VERSION_MINOR @sieve_VERSION_MINOR@)
 set(CPACK_PACKAGE_VERSION_PATCH @sieve_VERSION_PATCH@)
 
-set(CPACK_RESOURCE_FILE_LICENSE "COPYING")
-set(CPACK_RESOURCE_FILE_README "README")
+set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/COPYING")
+set(CPACK_RESOURCE_FILE_README "${PROJECT_SOURCE_DIR}/README")
+set(CPACK_RESOURCE_FILE_INSTALL "${PROJECT_SOURCE_DIR}/INSTALL")
 
 set(CPACK_SOURCE_GENERATOR "TGZ")
-set(CPACK_SOURCE_IGNORE_FILES 
-	".svn;/CMakeFiles/;.DS_Store;/_CPack_Packages/;CMakeCache.txt;sieve.tmproj;Makefile"
-)
+set(CPACK_SOURCE_IGNORE_FILES 	".DS_Store";
+								".svn";
+								"CMakeCache.txt$";
+								"CMakeFiles";
+								"CPackConfig.cmake$";
+								"CPackSourceConfig.cmake$";
+								"CTestTestfile.cmake$";
+								"Makefile$";
+								"Testing";
+								"_CPack_Packages";
+								"cmake_install.cmake$";
+								"/examples";
+								"install_manifest.txt$";
+								"sieve.tmproj$"
+								)
 set(CPACK_SOURCE_PACKAGE_FILE_NAME "${PROJECT_NAME}-${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH}")
 
 include(CPack)
+
+
+#
+# Testing
+#
+enable_testing()
+add_test (Test1 sieve)
+set_tests_properties (Test1 PROPERTIES PASS_REGULAR_EXPRESSION "Command line option '--in' is missing.")
+add_test (Test2 sieve -h)
+set_tests_properties (Test2 PROPERTIES PASS_REGULAR_EXPRESSION "Sieve is a tool to filter out molecules according user-defined criteria")
+add_test (Test3 sieve -v)
+set_tests_properties (Test3 PROPERTIES PASS_REGULAR_EXPRESSION "SIEVE v3.0.6")
 

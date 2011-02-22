@@ -18,7 +18,7 @@ else (OPENBABEL2_INCLUDE_DIR AND OPENBABEL2_LIBRARIES AND OPENBABEL2_VERSION_MET
    	if (NOT WIN32)
 		# Use the newer PkgConfig stuff
 		find_package(PkgConfig REQUIRED)
-        pkg_check_modules(OPENBABEL2 openbabel-2.0>=2.2.0)
+#        pkg_check_modules(OPENBABEL2 openbabel-2.0>=2.2.0)
         # Maintain backwards compatibility with previous version of module
         if (OPENBABEL2_FOUND STREQUAL "1")
             set(OPENBABEL2_VERSION_MET TRUE)
