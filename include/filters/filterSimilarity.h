@@ -22,6 +22,7 @@ GNU General Public License for more details.
 #define __FILTERSIMILARITY_H__
 
 #include <filters/filter.h>
+#include <fingerprint.h>
 
 
 

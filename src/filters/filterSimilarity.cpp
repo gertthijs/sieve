@@ -125,123 +125,122 @@ bool
 FilterSimilarity::Initialise(const std::string& parameters, const bool tabulate)
 {
    // Write message
-   std::cerr << "  -> " << _keyword << " ";
+   	std::cerr << "  -> " << _keyword << " ";
 
-   // Make a copy of the input line
-   std::string line(parameters);
-   line.erase(0, line.find_first_not_of(_whiteSpace, 0));
+   	// Make a copy of the input line
+   	std::string line(parameters);
+   	line.erase(0, line.find_first_not_of(_whiteSpace, 0));
    
-   // Process the parameters
-   std::vector<std::string> data;
-   data.clear();
-   line += " ";
-   unsigned int b(0);
-   unsigned int e(line.find_first_of(_whiteSpace, b));
-   while ( (e <= line.size()) && (b != std::string::npos) )
-   {
-      data.push_back(line.substr(b, e - b));
-      b = line.find_first_not_of(_whiteSpace, e);
-      e = line.find_first_of(_whiteSpace, b);
-   }
-   for_each(data[0].begin(), data[0].end(), toupper);
+   	// Process the parameters
+   	std::vector<std::string> data;
+   	data.clear();
+   	line += " ";
+   	unsigned int b(0);
+   	unsigned int e(line.find_first_of(_whiteSpace, b));
+   	while ( (e <= line.size()) && (b != std::string::npos) )
+   	{
+      	data.push_back(line.substr(b, e - b));
+      	b = line.find_first_not_of(_whiteSpace, e);
+      	e = line.find_first_of(_whiteSpace, b);
+   	}
+   	for_each(data[0].begin(), data[0].end(), toupper);
    
-   if (data.size() == 1)
-   {
-      std::cerr << "ERROR: " << _keyword << " entry is missing fragment name and smiles";
-      std::cerr << std::endl;
-      exit(1);
-   }
-   else if (data.size() == 2)
-   {
-      std::cerr << "ERROR: " << _keyword << " entry is missing smiles";
-      std::cerr << std::endl;
-      exit(1);
-   }
-   else
-   {
-      // Name
-      _name = data[1];
-      std::cerr << " " << _name;
+   	if (data.size() == 1)
+   	{
+      	std::cerr << "ERROR: " << _keyword << " entry is missing fragment name and smiles";
+      	std::cerr << std::endl;
+      	exit(1);
+   	}
+   	else if (data.size() == 2)
+   	{
+      	std::cerr << "ERROR: " << _keyword << " entry is missing smiles";
+      	std::cerr << std::endl;
+      	exit(1);
+   	}
+   	else
+   	{
+      	// Name
+      	_name = data[1];
+      	std::cerr << " " << _name;
       
-      // Smiles
-      _smiles = data[2];
-      std::stringstream ss(_smiles);
-      OpenBabel::OBMol ref;
-      OpenBabel::OBConversion conv(&ss);
-      conv.AddOption("d", OpenBabel::OBConversion::GENOPTIONS);
-      if (conv.SetInFormat("smi") && conv.Read(&ref))
-      {
-         _fingerprinter.CalculateFP(&ref, _reffp);
-      }
-      std::cerr << " " << _smiles;
-   }
+      	// Smiles
+      	_smiles = data[2];
+      	std::stringstream ss(_smiles);
+      	OpenBabel::OBMol ref;
+      	OpenBabel::OBConversion conv(&ss);
+      	conv.AddOption("d", OpenBabel::OBConversion::GENOPTIONS);
+      	if (conv.SetInFormat("smi") && conv.Read(&ref))
+      	{
+         	_fingerprinter.CalculateFP(&ref, _reffp);
+      	}
+      	std::cerr << " " << _smiles;
+   	}
    
-   if (!tabulate)
-   {
-      if (data.size() == 3)
-      {
-         std::cerr << "ERROR: " << _keyword << " entry is missing min and max limits";
-         std::cerr << std::endl;
-         exit(1);
-      }
-      else if(data.size() == 4)
-      {
-         std::cerr << "ERROR: " << _keyword << " entry is missing max limit";
-         std::cerr << std::endl;
-         exit(1);
-      }
-      else
-      {
-         if (data[3] == "*")
-         {
-            _minLimit = false;
-            _min = 0;
-            std::cerr << " *";
-         }
-         else
-         {
-            _minLimit = true;
-            _min = atof(data[3].c_str());
-            std::cerr << " " << _min;
-
-         }
-         if (_min < 0)
-         {
-            std::cerr << "ERROR: " << _keyword << ": min limit should be >= 0 ";
-            std::cerr << std::endl;
-            exit(1);
-         }
+   	if (!tabulate)
+   	{
+      	if (data.size() == 3)
+      	{
+         	std::cerr << "ERROR: " << _keyword << " entry is missing min and max limits";
+         	std::cerr << std::endl;
+         	exit(1);
+      	}
+      	else if(data.size() == 4)
+      	{
+         	std::cerr << "ERROR: " << _keyword << " entry is missing max limit";
+         	std::cerr << std::endl;
+         	exit(1);
+      	}
+      	else
+      	{
+         	if (data[3] == "*")
+         	{
+            	_minLimit = false;
+            	_min = 0;
+            	std::cerr << " *";
+         	}
+         	else
+         	{
+            	_minLimit = true;
+            	_min = atof(data[3].c_str());
+            	std::cerr << " " << _min;
+         	}
+         	if (_min < 0)
+         	{
+            	std::cerr << "ERROR: " << _keyword << ": min limit should be >= 0 ";
+            	std::cerr << std::endl;
+            	exit(1);
+         	}
    
-         if (data[4] == "*")
-         {
-            _maxLimit = false;
-            _max = 0;
-            std::cerr << " *";
-         }
-         else
-         {
-            _maxLimit = true;
-            _max = atof(data[4].c_str());
-            std::cerr << " " << _max;
-         }
-         if (_max < 0)
-         {
-            std::cerr << "ERROR: " << _keyword << ": max limit should be >= 0 ";
-            std::cerr << std::endl;
-            exit(1);
-         }
-         if (_maxLimit && (_max < _min))
-         {
-            std::cerr << "ERROR: " << _keyword << ": max limit should be >= min ";
-            std::cerr << std::endl;
-            exit(1);
-         }
-      }
-   }
+         	if (data[4] == "*")
+         	{
+            	_maxLimit = false;
+            	_max = 0;
+            	std::cerr << " *";
+         	}
+         	else
+         	{
+            	_maxLimit = true;
+            	_max = atof(data[4].c_str());
+            	std::cerr << " " << _max;
+         	}
+         	if (_max < 0)
+         	{
+            	std::cerr << "ERROR: " << _keyword << ": max limit should be >= 0 ";
+            	std::cerr << std::endl;
+            	exit(1);
+         	}
+         	if (_maxLimit && (_max < _min))
+         	{
+            	std::cerr << "ERROR: " << _keyword << ": max limit should be >= min ";
+            	std::cerr << std::endl;
+            	exit(1);
+         	}
+      	}
+   	}
    
-   std::cerr << std::endl;
-   _initialised = true;
-   return true;
+   	std::cerr << std::endl;
+   	_initialised = true;
+   	return true;
 }
 
 

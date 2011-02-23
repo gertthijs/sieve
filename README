@@ -1,0 +1,3 @@
+- Compilation and installation instructions are described in the 'INSTALL.txt' file.
+- Documentation on the use of SIEVE is available in the doc/ directory.
+- Example filters are available in the filters/ directory.

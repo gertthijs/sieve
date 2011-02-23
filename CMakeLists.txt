@@ -9,7 +9,7 @@ find_package(OpenBabel2 REQUIRED)
 # Version
 set (${PROJECT_NAME}_VERSION_MAJOR 3)
 set (${PROJECT_NAME}_VERSION_MINOR 0)
-set (${PROJECT_NAME}_VERSION_PATCH 6)
+set (${PROJECT_NAME}_VERSION_PATCH 7)
 configure_file ("${PROJECT_SOURCE_DIR}/sieveConfig.h.in" "${PROJECT_SOURCE_DIR}/include/sieveConfig.h")
 
 # Release type
@@ -22,6 +22,7 @@ set (sources     ${SieveDir}/main.cpp
                  ${SieveDir}/counter.cpp
                  ${SieveDir}/options.cpp
                  ${SieveDir}/parseCommandLine.cpp
+                 ${SieveDir}/fingerprint.cpp
                  ${SieveDir}/filters/filter.cpp
                  ${SieveDir}/filters/filterAbsorption.cpp
                  ${SieveDir}/filters/filterAndrewsEnergy.cpp
@@ -145,10 +146,5 @@ include(CPack)
 # Testing
 #
 enable_testing()
-add_test (Test1 sieve)
-set_tests_properties (Test1 PROPERTIES PASS_REGULAR_EXPRESSION "Command line option '--in' is missing.")
-add_test (Test2 sieve -h)
-set_tests_properties (Test2 PROPERTIES PASS_REGULAR_EXPRESSION "Sieve is a tool to filter out molecules according user-defined criteria")
-add_test (Test3 sieve -v)
-set_tests_properties (Test3 PROPERTIES PASS_REGULAR_EXPRESSION "SIEVE v3.0.6")
+include(${CMAKE_MODULE_PATH}/IncludeAllTests.cmake)
 

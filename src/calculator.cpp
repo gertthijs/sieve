@@ -299,7 +299,7 @@ Calculator::ParseFilterFile(const std::string& filename, Options* o)
       	if (parameter == "SIMILARITY")
       	{
          	_similarityFilters.push_back(new FilterSimilarity());
-         	_sf = _similarityFilters[_similarityFilters.size() - 1];
+        	_sf = _similarityFilters[_similarityFilters.size() - 1];
          	_sf->Initialise(line, o->Tabulate());
          	goto endOfLoop1;
       	}
@@ -655,7 +655,6 @@ Calculator::Calculate(Options* o)
    		}
 
       	// Molecule name
-		std::cerr << "RENAME: " << o->Rename() << std::endl;
       	if (o->Rename())
       	{
          	os.str("");
@@ -772,7 +771,7 @@ Calculator::Calculate(Options* o)
          	_sf = _similarityFilters[i];
          	if (_sf->IsInitialised())
          	{
-            	_sf->Calculate(mol);
+           		_sf->Calculate(mol);
             
             	if (o->Tabulate())
             	{
