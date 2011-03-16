@@ -117,8 +117,8 @@ FilterTitle::Initialise(const std::string& parameters, const bool tabulate)
    line += " ";
    
    // Keyword
-   unsigned int b(0);
-   unsigned int e(line.find_first_of(_whiteSpace, b));
+   std::size_t b(0);
+   std::size_t e(line.find_first_of(_whiteSpace, b));
    data.push_back(line.substr(b, e - b));
    line.erase(b, e - b);
    for_each(data[0].begin(), data[0].end(), toupper);

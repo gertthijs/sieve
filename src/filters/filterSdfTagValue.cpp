@@ -153,8 +153,8 @@ FilterSdfTagValue::Initialise(const std::string& parameter, const bool tabulate)
    line += " ";
    
    // Keyword
-   unsigned int b(0);
-   unsigned int e(line.find_first_of(_whiteSpace, b));
+   std::size_t b(0);
+   std::size_t e(line.find_first_of(_whiteSpace, b));
    data.push_back(line.substr(b, e - b));
    for_each(data[0].begin(), data[0].end(), toupper);
    if (data[0] != _keyword)
@@ -276,9 +276,9 @@ FilterSdfTagValue::Calculate(OpenBabel::OBMol* mol)
    // Convert string into double
    {
       // Remove leading and trailing whitepace
-      std::string::size_type bgn = _tagvalue.find_first_not_of(" \t\n");
+      std::size_t bgn = _tagvalue.find_first_not_of(" \t\n");
       std::string tmp = _tagvalue.erase(0, bgn);
-      std::string::size_type end = tmp.find_first_of(" \t\n");
+      std::size_t end = tmp.find_first_of(" \t\n");
       if (end != std::string::npos)
       {
          _tagvalue = tmp.erase(end, tmp.size() - end);

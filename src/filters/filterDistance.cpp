@@ -151,8 +151,8 @@ FilterDistance::Initialise(const std::string& parameters, const bool tabulate)
    line.erase(0, line.find_first_not_of(_whiteSpace, 0));
    data.clear();
    line += " ";
-   unsigned int b(0);
-   unsigned int e(line.find_first_of(_whiteSpace, b));
+   std::size_t b(0);
+   std::size_t e(line.find_first_of(_whiteSpace, b));
    while ( (e <= line.size()) && (b != std::string::npos) )
    {
       data.push_back(line.substr(b, e - b));
