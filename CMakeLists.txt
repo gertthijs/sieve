@@ -8,8 +8,8 @@ find_package(OpenBabel2 REQUIRED)
 
 # Version
 set (${PROJECT_NAME}_VERSION_MAJOR 3)
-set (${PROJECT_NAME}_VERSION_MINOR 0)
-set (${PROJECT_NAME}_VERSION_PATCH 8)
+set (${PROJECT_NAME}_VERSION_MINOR 1)
+set (${PROJECT_NAME}_VERSION_PATCH 0)
 configure_file ("${PROJECT_SOURCE_DIR}/sieveConfig.h.in" "${PROJECT_SOURCE_DIR}/include/sieveConfig.h")
 
 # Release type
@@ -25,6 +25,7 @@ set (sources     ${SieveDir}/main.cpp
                  ${SieveDir}/fingerprint.cpp
                  ${SieveDir}/filters/filter.cpp
                  ${SieveDir}/filters/filterAbsorption.cpp
+                 ${SieveDir}/filters/filterAdmetScore.cpp
                  ${SieveDir}/filters/filterAndrewsEnergy.cpp
                  ${SieveDir}/filters/filterAromaticOverTotalRingFraction.cpp
                  ${SieveDir}/filters/filterAromaticRingFraction.cpp

@@ -84,6 +84,7 @@ Calculator::Calculator(void)
    	_integerFilters.push_back(new FilterTotalFormalCharge());
    
    	// Real property filters
+   	_realFilters.push_back(new FilterAdmetScore());
    	_realFilters.push_back(new FilterAndrewsEnergy());
    	_realFilters.push_back(new FilterAromaticRingFraction());
    	_realFilters.push_back(new FilterAromaticOverTotalRingFraction());

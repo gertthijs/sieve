@@ -92,6 +92,7 @@ GNU General Public License for more details.
 
 // Real property filters
 #include <filters/filterRealProperty.h>
+#include <filters/filterAdmetScore.h>
 #include <filters/filterAndrewsEnergy.h>
 #include <filters/filterAromaticRingFraction.h>
 #include <filters/filterAromaticOverTotalRingFraction.h>
