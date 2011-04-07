@@ -135,5 +135,5 @@ set_tests_properties (Test100 PROPERTIES PASS_REGULAR_EXPRESSION "Command line o
 add_test (Test200 sieve -h)
 set_tests_properties (Test200 PROPERTIES PASS_REGULAR_EXPRESSION "Sieve is a tool to filter out molecules according user-defined criteria")
 add_test (Test300 sieve -v)
-set_tests_properties (Test300 PROPERTIES PASS_REGULAR_EXPRESSION "SIEVE v3.0.7")
+set_tests_properties (Test300 PROPERTIES PASS_REGULAR_EXPRESSION "SIEVE v3.1")
 
